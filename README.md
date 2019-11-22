@@ -1,55 +1,10 @@
-# Db2 Warehouse on Cloud -  Node.js Hello World Sample
+# Watson Video Recongnition on Cloud -  Node.js Sample Code for image classification
 
-The code in this repository provides a simple implementation of an app running on Node.js runtime demonstrating how to connect Node.js applications to the IBM Db2 Warehouse on Cloud service.
+The code in this repository provides a simple implementation of an app running on Node.js runtime demonstrating how to connect Node.js applications to the Watson Video Recongnition.
 
-You can bind a IBM Db2 Warehouse on Cloud service instance to an app running on Node.js runtime in the IBM Cloud (Bluemix) and then work with the data in the Db2 database (relational SQL database). The Bluemix Node.js runtime will automatically lay down native driver dependencies when you have a Db2 Service instance bound to your app. The sample illustrated here uses express and jade node modules.
-
-For issues that you encounter with this service, go to [**Get help**](https://developer.ibm.com/bluemix/) in the Bluemix developer community.
-
-[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy)
-
-![Bluemix Deployments](https://deployment-tracker.mybluemix.net/stats/6dc62259729f4ccc57f616d7f1e7315b/badge.svg)
-
-## Running the app on Bluemix
-
-1. If you do not already have a Bluemix account, [sign up here](https://console.ng.bluemix.net/registration/)
-
-2. Download and install the [Cloud Foundry CLI](https://github.com/cloudfoundry/cli/releases) tool
-
-3. Clone the app to your local environment from your terminal using the following command:
-
-  ```
-  git clone https://github.com/IBM-Bluemix/dashdb-nodejs-helloworld.git
-  ```
-
-4. `cd` into this newly created directory
-
-5. Open the `manifest.yml` file and change the `host` value to something unique.
-
-  The host you choose will determinate the subdomain of your application's URL:  `<host>.mybluemix.net`
-
-6. Connect to Bluemix in the command line tool and follow the prompts to log in.
-
-  ```
-  $ cf api https://api.ng.bluemix.net
-  $ cf login
-  ```
-
-7. Create a Db2 Warehouse on Cloud service instance in Bluemix.
-
-  ```
-  $ cf create-service dashDB Entry dashDB-nodesample
-  ```
-
-8. Push the app to Bluemix.
-
-  ```
-  $ cf push
-  ```
-
-And voila! You now have your very own instance of an app running Node.js runtime and connecting and querying the dashDB service on Bluemix.
 
 ## Run the app locally
+
 1. If you do not already have a Bluemix account, [sign up here](https://console.ng.bluemix.net/registration/)
 
 2. If you have not already, [download node.js](https://nodejs.org/en/download/) and install it on your local machine.
@@ -57,7 +12,7 @@ And voila! You now have your very own instance of an app running Node.js runtime
 3. Clone the app to your local environment from your terminal using the following command:
 
   ```
-    git clone https://github.com/IBM-Bluemix/dashdb-nodejs-helloworld.git
+    git clone https://github.com/lee-zhg/vc-api
   ```
 
 4. `cd` into this newly created directory
@@ -68,23 +23,42 @@ And voila! You now have your very own instance of an app running Node.js runtime
   npm install
   ```
 
-6. Create a dashDB service using your Bluemix account and replace the corresponding credentials in your app.js file
+6. Replace 3 pieces of information
 
-```
-        db: "BLUDB",
-        hostname: "xxxx",
-        port: 50000,
-        username: "xxx",
-        password: "xxx"
-```
+  * iam_apikey - the API key of Watson Image Recognition service instance
+  * classifier_ids - classifier_id of your VC model
+  * images_file - you also need to copy your testing image file to the same folder, and update the file name in the sample code
 
-7. Start your app locally with the following command
+7. Run the sample code locally with the following command
 
   ```
   node app.js
   ```
+8. You should see output similar to
 
-This command will start your application. When your app has started, your console will print that your `Express server listening on port 3000`.
+  ```
+  {
+    "images": [
+      {
+        "classifiers": [
+          {
+            "classifier_id": "lijing_1744016643",
+            "name": "lijing",
+            "classes": [
+              {
+                "class": "Burned Home",
+                "score": 0.905
+              }
+            ]
+          }
+        ],
+        "image": "test04.jpg"
+      }
+    ],
+    "images_processed": 1,
+    "custom_classes": 2
+  }
+  ```
 
 
 ## Decomposition Instructions
